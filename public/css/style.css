@@ -11,7 +11,9 @@ a {
 li {
     list-style: none;
 }
-
+header img{
+    width: 25%;
+}
 .ingredients, #ingredients {
     background-color: #3282F7;
 }
@@ -97,6 +99,7 @@ svg {
     cursor: pointer;
     filter: invert(100%) sepia(91%) saturate(38%) hue-rotate(359deg) brightness(109%) contrast(111%);
 }
+
 /* filters */
 .filter-btn {
     display: flex;
@@ -251,4 +254,22 @@ svg {
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+
+@media screen and (max-width: 577px) {
+    .tags__card{
+        margin-bottom: 10px;
+    }
+    .filters__list{
+        gap: 10px;
+    }
+    .filter-btn{
+        margin-right: 0px;
+    }
+}
+@media screen and (max-width: 947px) {
+    header img{
+        width: 50%;
+    }
 }
