@@ -11,9 +11,11 @@ a {
 li {
     list-style: none;
 }
-header img{
+
+header img {
     width: 25%;
 }
+
 .ingredients, #ingredients {
     background-color: #3282F7;
 }
@@ -102,38 +104,45 @@ svg {
 
 /* filters */
 .filter-btn {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
     width: 170px;
     height: 69px;
-    border-radius: 5px;
     color: #fff;
     margin-right: 20px;
     transition: 0.5s ease-in-out;
-}
-
-.filter-input {
-    display: none;
-    width: 100%;
-    border: none;
-    color: #FFFFFF;
-    outline: none;
-}
-
-.filter-input::placeholder {
-    color: #E7E7E7;
+    cursor: pointer;
 }
 
 .filter-btn p {
     letter-spacing: 0.5px;
 }
 
-.filter-content i {
-    font-size: 20px;
-    transition: 0.3s ease-in-out;
-    cursor: pointer;
+.filter-input {
+    display: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.filter-input, .filter-content label {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.filter-input::placeholder {
+    color: #E7E7E7;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 5px;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    padding: 0 15px;
 }
 
 .filter-content {
@@ -142,20 +151,26 @@ svg {
     align-items: center;
     width: 100%;
     height: 69px;
-    padding: 15px 10px;
 }
+
+.filter-container i {
+    font-size: 20px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
 
 .dropdown {
     display: none;
-    padding: 15px 10px;
     transition: 0.5s ease-in-out;
 }
 
 .dropdown .dropdown-menu {
     display: flex;
     flex-wrap: wrap;
-    max-height: 397px;
+    max-height: 328px;
     overflow: auto;
+    margin-bottom: 15px;
 }
 
 .dropdown .dropdown-menu li {
@@ -166,10 +181,10 @@ svg {
 
 .filter-btn.active {
     width: 667px;
-    height: 100%;
+    /* height: 100%; */
 }
 
-.filter-btn.active #filter-title {
+.filter-btn.active .filter-content label {
     display: none;
 }
 
@@ -258,18 +273,27 @@ svg {
 
 
 @media screen and (max-width: 577px) {
-    .tags__card{
+    .tags__card {
         margin-bottom: 10px;
     }
-    .filters__list{
+
+    .filters__list {
         gap: 10px;
     }
-    .filter-btn{
+
+    .filter-btn {
         margin-right: 0px;
     }
+    .recipe__list{
+        gap: 20px;
+    }
+    .recipe__card{
+        width: 100%;
+    }
 }
+
 @media screen and (max-width: 947px) {
-    header img{
+    header img {
         width: 50%;
     }
 }
