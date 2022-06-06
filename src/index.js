@@ -30,6 +30,10 @@ function displayRecipes() {
     recipeSection.innerHTML = getAllRecipes(recipes);
 }
 
+function handlerecipe() {
+
+}
+
 function init() {
     handleDownMenu();
     displayRecipes();
