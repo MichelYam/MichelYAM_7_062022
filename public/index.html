@@ -19,14 +19,14 @@
     </header>
     <main>
         <!-- searchBar -->
-        <section id="searchBar">
-            <form action="" class="searchBar">
+        <div id="search-section">
+            <form action="index.html" class="searchBar">
                 <input class="input-search" id="search" type="text" placeholder="Recherche une recette" name="search">
-                <i class="fas fa-search"></i></i>
+                <i class="fas fa-search"></i>
             </form>
-        </section>
+        </div>
         <!-- filters -->
-        <section id="filters">
+        <div id="filters">
             <div class="tags__list">
                 <div class="tags__card ingredients">
                     <p>Coco</p>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="filters__list">
-                <article class="filter-btn">
+                <div class="filter-btn">
                     <div class="filter-container ingredients">
                         <div class="filter-content">
                             <label for="ingredients-input" class="filter-title">Ingrédient</label>
@@ -62,8 +62,8 @@
                         <div id="blue-content" class="dropdown">
                         </div>
                     </div>
-                </article>
-                <article class="filter-btn">
+                </div>
+                <div class="filter-btn">
                     <div class="filter-container devices">
                         <div class="filter-content">
                             <label for="devices-input" class="filter-title">Appareils</label>
@@ -74,8 +74,8 @@
                         <div id="green-content" class="dropdown">
                         </div>
                     </div>
-                </article>
-                <article class="filter-btn">
+                </div>
+                <div class="filter-btn">
                     <div class="filter-container utensils">
                         <div class="filter-content">
                             <label for="ustensiles-input" class="filter-title">Ustensiles</label>
@@ -86,86 +86,40 @@
                         <div id="red-content" class="dropdown">
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- list of recipes -->
+        <div class="recipes">
+            <div class="recipe__list">
+                <article class="recipe__card">
+                    <div class="img"></div>
+                    <div class="recipes__card-content">
+                        <div class="recipe__header">
+                            <h2>Limonade de Doco</h2>
+                            <div>
+                                <i class="far fa-clock"></i>
+                                <span>10 min</span>
+                            </div>
+                        </div>
+                        <div class="recipe__container">
+                            <ul>
+                                <li>Lait de coco: 400ml</li>
+                                <li>Lait de coco: 400ml</li>
+                                <li>Lait de coco: 400ml</li>
+                                <li>Lait de coco: 400ml</li>
+                                <li>Lait de coco: 400ml</li>
+                            </ul>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus repudiandae
+                                veritatis
+                                odit at fugiat adipisci laboriosam incidunt omnis, commodi sapiente nihil esse
+                                corporis
+                                quo recusandae assumenda quis exercitationem quasi est.</p>
+                        </div>
+                    </div>
                 </article>
             </div>
-        </section>
-        <!-- list of recipes -->
-        <section class="recipes">
-            <div class="recipe__list">
-                <div class="recipe__card">
-                    <div class="img"></div>
-                    <div class="recipes__card-content">
-                        <div class="recipe__header">
-                            <h2>Limonade de Doco</h2>
-                            <div>
-                                <i class="far fa-clock"></i>
-                                <span>10 min</span>
-                            </div>
-                        </div>
-                        <div class="recipe__container">
-                            <ul>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus repudiandae veritatis
-                                odit at fugiat adipisci laboriosam incidunt omnis, commodi sapiente nihil esse corporis
-                                quo recusandae assumenda quis exercitationem quasi est.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe__card">
-                    <div class="img"></div>
-                    <div class="recipes__card-content">
-                        <div class="recipe__header">
-                            <h2>Limonade de Doco</h2>
-                            <div>
-                                <i class="far fa-clock"></i>
-                                <span>10 min</span>
-                            </div>
-                        </div>
-                        <div class="recipe__container">
-                            <ul>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus repudiandae veritatis
-                                odit at fugiat adipisci laboriosam incidunt omnis, commodi sapiente nihil esse corporis
-                                quo recusandae assumenda quis exercitationem quasi est.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="recipe__card">
-                    <div class="img"></div>
-                    <div class="recipes__card-content">
-                        <div class="recipe__header">
-                            <h2>Limonade de Doco</h2>
-                            <div>
-                                <i class="far fa-clock"></i>
-                                <span>10 min</span>
-                            </div>
-                        </div>
-                        <div class="recipe__container">
-                            <ul>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                                <li>Lait de coco: 400ml</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus repudiandae veritatis
-                                odit at fugiat adipisci laboriosam incidunt omnis, commodi sapiente nihil esse corporis
-                                quo recusandae assumenda quis exercitationem quasi est.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
     <script src="../src/index.js"></script>
 </body>
