@@ -1,3 +1,6 @@
+import recipes from '../data/recipes.js';
+import getAllRecipes from './recipes.js';
+
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
     const itemClass = this.parentNode.parentNode.parentNode.className;
@@ -11,7 +14,6 @@ function toggleItem() {
 }
 
 function handleDownMenu() {
-
     // handle open/close filters
     const arrow = document.querySelectorAll('.fa-angle-down');
     const label = document.querySelectorAll('.filter-title');
@@ -23,8 +25,14 @@ function handleDownMenu() {
     }
 }
 
+function displayRecipes() {
+    const recipeSection = document.querySelector('.recipe__list');
+    recipeSection.innerHTML = getAllRecipes(recipes);
+}
+
 function init() {
     handleDownMenu();
+    displayRecipes();
 }
 
 init();
