@@ -69,9 +69,11 @@ function handlerecipe() {
             }
         }
     }
-    if (inputValue === '') {
+
+    if (inputValue.length < 3) {
         recipeArr = recipes;
     }
+
     // delete duplicate
     recipeArr = [...new Set(recipeArr)];
     displayRecipes(recipeArr);
