@@ -19,9 +19,10 @@ function toggleItem() {
         this.parentNode.parentNode.parentNode.className = 'filter-btn active';
     }
 }
-
+/**
+ * Handle open/close filters
+ */
 function handleDownMenu() {
-    // handle open/close filters
     const arrow = document.querySelectorAll('.fa-angle-down');
     const label = document.querySelectorAll('.filter-title');
     for (let i = 0; i < arrow.length; i++) {
@@ -32,6 +33,10 @@ function handleDownMenu() {
     }
 }
 
+/**
+ * Display all recipes from database
+ * @param {array} recipe ;
+ */
 function displayRecipes(recipe) {
     const recipeSection = document.querySelector('.recipe__list');
     recipeSection.innerHTML = getAllRecipes(recipe);
@@ -40,7 +45,6 @@ function displayRecipes(recipe) {
 function handlerecipe() {
     let recipeArr = [];
     const inputValue = searchInput.value.toLowerCase();
-    // console.log(inputValue);
     if (inputValue.length >= 3) {
         for (let i = 0; i <= recipes.length - 1; i++) {
             const recipeName = recipes[i].name.toLowerCase();
@@ -54,22 +58,24 @@ function handlerecipe() {
 
             for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
                 const recipeIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
-                console.log(recipeIngredients);
                 if (recipeIngredients.includes(inputValue)) {
                     recipeArr.push(recipes[i]);
                 }
             }
         }
     }
+    if (inputValue === '') {
+        recipeArr = recipes;
+    }
     // delete duplicate
     recipeArr = [...new Set(recipeArr)];
     displayRecipes(recipeArr);
     // return recipeArr;
 }
+
+searchInput.addEventListener('input', handlerecipe);
+
 function displayTagsList() {
-    ingrediantsTags(recipes);
-    ustensilsTags(recipes);
-    appliancesTags(recipes);
     ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
     appliancesList.innerHTML = tagsList(appliancesTags(recipes));
     ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
@@ -78,7 +84,6 @@ function init() {
     handleDownMenu();
     displayTagsList();
     displayRecipes(recipes);
-    searchInput.addEventListener('input', handlerecipe);
 }
 
 init();
