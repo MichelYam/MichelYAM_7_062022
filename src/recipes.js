@@ -34,3 +34,5 @@ export default function getAllRecipes(recipes) {
         </article>`
     )).join('');
 }
+
+

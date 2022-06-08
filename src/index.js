@@ -1,5 +1,12 @@
+/* eslint-disable no-plusplus */
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
+import { ingrediantsTags, appliancesTags, ustensilsTags, tagsList } from './tags.js';
+
+const searchInput = document.getElementById('search');
+const ingredientsList = document.querySelector('#blue-content ul');
+const appliancesList = document.querySelector('#green-content ul');
+const ustensilsList = document.querySelector('#red-content ul');
 
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
@@ -25,18 +32,53 @@ function handleDownMenu() {
     }
 }
 
-function displayRecipes() {
+function displayRecipes(recipe) {
     const recipeSection = document.querySelector('.recipe__list');
-    recipeSection.innerHTML = getAllRecipes(recipes);
+    recipeSection.innerHTML = getAllRecipes(recipe);
 }
 
 function handlerecipe() {
+    let recipeArr = [];
+    const inputValue = searchInput.value.toLowerCase();
+    // console.log(inputValue);
+    if (inputValue.length >= 3) {
+        for (let i = 0; i <= recipes.length - 1; i++) {
+            const recipeName = recipes[i].name.toLowerCase();
+            const recipeDescription = recipes[i].description.toLowerCase();
+            if (recipeName.includes(inputValue)) {
+                recipeArr.push(recipes[i]);
+            }
+            if (recipeDescription.includes(inputValue)) {
+                recipeArr.push(recipes[i]);
+            }
 
+            for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
+                const recipeIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
+                console.log(recipeIngredients);
+                if (recipeIngredients.includes(inputValue)) {
+                    recipeArr.push(recipes[i]);
+                }
+            }
+        }
+    }
+    // delete duplicate
+    recipeArr = [...new Set(recipeArr)];
+    displayRecipes(recipeArr);
+    // return recipeArr;
 }
-
+function displayTagsList() {
+    ingrediantsTags(recipes);
+    ustensilsTags(recipes);
+    appliancesTags(recipes);
+    ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
+    appliancesList.innerHTML = tagsList(appliancesTags(recipes));
+    ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
+}
 function init() {
     handleDownMenu();
-    displayRecipes();
+    displayTagsList();
+    displayRecipes(recipes);
+    searchInput.addEventListener('input', handlerecipe);
 }
 
 init();
