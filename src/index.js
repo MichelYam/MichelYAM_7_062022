@@ -1,7 +1,12 @@
 /* eslint-disable no-plusplus */
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
-import { ingrediantsTags, appliancesTags, ustensilsTags, tagsList } from './tags.js';
+import {
+    ingrediantsTags,
+    appliancesTags,
+    ustensilsTags,
+    tagsList,
+} from './tags.js';
 
 const searchInput = document.getElementById('search');
 const ingredientsList = document.querySelector('#blue-content ul');
@@ -38,32 +43,34 @@ function displayRecipes(recipe) {
 }
 
 function handlerecipe() {
-    let recipeArr = [];
     const inputValue = searchInput.value.toLowerCase();
-    // console.log(inputValue);
     if (inputValue.length >= 3) {
-        for (let i = 0; i <= recipes.length - 1; i++) {
-            const recipeName = recipes[i].name.toLowerCase();
-            const recipeDescription = recipes[i].description.toLowerCase();
-            if (recipeName.includes(inputValue)) {
-                recipeArr.push(recipes[i]);
-            }
-            if (recipeDescription.includes(inputValue)) {
-                recipeArr.push(recipes[i]);
+        let recipeArr = recipes.filter((recipe) => {
+            const recipeName = recipe.name.toLowerCase();
+            const recipeDescription = recipe.description.toLowerCase();
+
+            if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
+                console.log('yes');
+                return true;
             }
 
-            for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
-                const recipeIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
-                console.log(recipeIngredients);
-                if (recipeIngredients.includes(inputValue)) {
-                    recipeArr.push(recipes[i]);
+            // let ingredientsList = [];
+            recipe.ingredients.filter((element) => {
+                const recipeIngredient = element.ingredient.toLowerCase();
+                if (recipeIngredient.includes(inputValue)) {
+                    return true;
                 }
-            }
-        }
+            });
+        });
+        console.log(recipeArr);
+    }
+    // afficher toutes les recettes
+    if (inputValue === '' && recipes.length === 0) {
+        // recipes = recipes;
     }
     // delete duplicate
-    recipeArr = [...new Set(recipeArr)];
-    displayRecipes(recipeArr);
+    // recipeArr = [...new Set(recipeArr)];
+    // displayRecipes(recipeArr);
     // return recipeArr;
 }
 function displayTagsList() {
@@ -74,11 +81,15 @@ function displayTagsList() {
     appliancesList.innerHTML = tagsList(appliancesTags(recipes));
     ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
 }
+
+searchInput.addEventListener('input', () => {
+    handlerecipe();
+});
+
 function init() {
     handleDownMenu();
     displayTagsList();
     displayRecipes(recipes);
-    searchInput.addEventListener('input', handlerecipe);
 }
 
 init();
