@@ -1,10 +1,15 @@
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
+import { ingrediantsTags, appliancesTags, ustensilsTags, tagsList } from './tags.js';
+
+const ingredientsList = document.querySelector('#blue-content ul');
+const appliancesList = document.querySelector('#green-content ul');
+const ustensilsList = document.querySelector('#red-content ul');
 
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
     const itemClass = this.parentNode.parentNode.parentNode.className;
-    console.log(itemClass);
+    // console.log(itemClass);
     for (let i = 0; i < filterBtn.length; i++) {
         filterBtn[i].className = 'filter-btn';
     }
@@ -29,9 +34,17 @@ function displayRecipes() {
     const recipeSection = document.querySelector('.recipe__list');
     recipeSection.innerHTML = getAllRecipes(recipes);
 }
-
+function displayTagsList() {
+    ingrediantsTags(recipes);
+    ustensilsTags(recipes);
+    appliancesTags(recipes);
+    ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
+    appliancesList.innerHTML = tagsList(appliancesTags(recipes));
+    ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
+}
 function init() {
     handleDownMenu();
+    displayTagsList();
     displayRecipes();
 }
 
