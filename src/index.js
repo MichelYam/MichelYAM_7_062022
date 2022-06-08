@@ -12,7 +12,6 @@ const searchInput = document.getElementById('search');
 const ingredientsList = document.querySelector('#blue-content ul');
 const appliancesList = document.querySelector('#green-content ul');
 const ustensilsList = document.querySelector('#red-content ul');
-const inputValue = searchInput.value.toLowerCase();
 
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
@@ -43,7 +42,8 @@ function displayRecipes(recipe) {
     recipeSection.innerHTML = getAllRecipes(recipe);
 }
 
-function handlerecipe() {
+function handleRecipe() {
+    const inputValue = searchInput.value.toLowerCase();
     if (inputValue.length >= 3) {
         const recipeArr = recipes.filter((recipe) => {
             const recipeName = recipe.name.toLowerCase();
@@ -62,11 +62,11 @@ function handlerecipe() {
                 return true;
             }
         });
-        console.log(recipeArr);
+        displayRecipes(recipeArr);
     }
-    // afficher toutes les recettes
-    if (inputValue === '' && recipes.length === 0) {
-        // recipes = recipes;
+
+    if (inputValue === '') {
+        displayRecipes(recipes);
     }
 }
 function displayTagsList() {
@@ -78,11 +78,7 @@ function displayTagsList() {
     ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
 }
 
-searchInput.addEventListener('input', () => {
-    if (inputValue.length >= 3) {
-        handlerecipe();
-    }
-});
+searchInput.addEventListener('input', handleRecipe);
 
 function init() {
     handleDownMenu();
