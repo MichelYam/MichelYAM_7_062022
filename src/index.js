@@ -45,22 +45,22 @@ function displayRecipes(recipe) {
 function handlerecipe() {
     const inputValue = searchInput.value.toLowerCase();
     if (inputValue.length >= 3) {
-        let recipeArr = recipes.filter((recipe) => {
+        const recipeArr = recipes.filter((recipe) => {
             const recipeName = recipe.name.toLowerCase();
             const recipeDescription = recipe.description.toLowerCase();
 
             if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
-                console.log('yes');
                 return true;
             }
 
-            // let ingredientsList = [];
-            recipe.ingredients.filter((element) => {
-                const recipeIngredient = element.ingredient.toLowerCase();
-                if (recipeIngredient.includes(inputValue)) {
-                    return true;
-                }
+            const ingredientsListArr = recipe.ingredients.filter((element) => {
+                const ingredientLowerCase = element.ingredient.toLowerCase();
+                return ingredientLowerCase.includes(inputValue);
             });
+
+            if (ingredientsListArr.length > 0) {
+                return true;
+            }
         });
         console.log(recipeArr);
     }
@@ -68,10 +68,6 @@ function handlerecipe() {
     if (inputValue === '' && recipes.length === 0) {
         // recipes = recipes;
     }
-    // delete duplicate
-    // recipeArr = [...new Set(recipeArr)];
-    // displayRecipes(recipeArr);
-    // return recipeArr;
 }
 function displayTagsList() {
     ingrediantsTags(recipes);
