@@ -1,7 +1,12 @@
 /* eslint-disable no-plusplus */
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
-import { ingrediantsTags, appliancesTags, ustensilsTags, tagsList } from './tags.js';
+import {
+    ingrediantsTags,
+    appliancesTags,
+    ustensilsTags,
+    tagsList,
+} from './tags.js';
 
 const searchInput = document.getElementById('search');
 const ingredientsList = document.querySelector('#blue-content ul');
@@ -70,7 +75,6 @@ function handlerecipe() {
     // delete duplicate
     recipeArr = [...new Set(recipeArr)];
     displayRecipes(recipeArr);
-    // return recipeArr;
 }
 
 searchInput.addEventListener('input', handlerecipe);
