@@ -49,10 +49,12 @@ function handleRecipe() {
             const recipeName = recipe.name.toLowerCase();
             const recipeDescription = recipe.description.toLowerCase();
 
+            // filter name et description
             if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
                 return true;
             }
 
+            // filter ingredient
             const ingredientsListArr = recipe.ingredients.filter((element) => {
                 const ingredientLowerCase = element.ingredient.toLowerCase();
                 return ingredientLowerCase.includes(inputValue);
@@ -66,6 +68,7 @@ function handleRecipe() {
     }
     return recipes;
 }
+
 function displayTagsList() {
     ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
     appliancesList.innerHTML = tagsList(appliancesTags(recipes));
