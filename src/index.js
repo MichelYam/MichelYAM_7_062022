@@ -63,9 +63,8 @@ function handleRecipe() {
             }
         });
         return recipeArr;
-    } else {
-        return recipes;
     }
+    return recipes;
 }
 function displayTagsList() {
     ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
