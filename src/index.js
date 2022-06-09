@@ -62,11 +62,9 @@ function handleRecipe() {
                 return true;
             }
         });
-        displayRecipes(recipeArr);
-    }
-
-    if (inputValue === '') {
-        displayRecipes(recipes);
+        return recipeArr;
+    } else {
+        return recipes;
     }
 }
 function displayTagsList() {
@@ -75,7 +73,9 @@ function displayTagsList() {
     ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
 }
 
-searchInput.addEventListener('input', handleRecipe);
+searchInput.addEventListener('input', () => {
+    displayRecipes(handleRecipe());
+});
 
 function init() {
     handleDownMenu();
