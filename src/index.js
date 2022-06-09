@@ -70,9 +70,6 @@ function handleRecipe() {
     }
 }
 function displayTagsList() {
-    ingrediantsTags(recipes);
-    ustensilsTags(recipes);
-    appliancesTags(recipes);
     ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
     appliancesList.innerHTML = tagsList(appliancesTags(recipes));
     ustensilsList.innerHTML = tagsList(ustensilsTags(recipes));
