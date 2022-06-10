@@ -56,30 +56,27 @@ function handlerecipe() {
             const recipeDescription = recipes[i].description.toLowerCase();
             if (recipeName.includes(inputValue)) {
                 recipeArr.push(recipes[i]);
-            }
-            if (recipeDescription.includes(inputValue)) {
+            } else if (recipeDescription.includes(inputValue)) {
                 recipeArr.push(recipes[i]);
-            }
-
-            for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
-                const recipeIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
-                if (recipeIngredients.includes(inputValue)) {
-                    recipeArr.push(recipes[i]);
+            } else {
+                for (let j = 0; j <= recipes[i].ingredients.length - 1; j++) {
+                    const recipeIngredients = recipes[i].ingredients[j].ingredient.toLowerCase();
+                    if (recipeIngredients.includes(inputValue)) {
+                        recipeArr.push(recipes[i]);
+                        break;
+                    }
                 }
             }
         }
-    }
-
-    if (inputValue.length < 3) {
+    } else {
         recipeArr = recipes;
     }
-
-    // delete duplicate
-    recipeArr = [...new Set(recipeArr)];
-    displayRecipes(recipeArr);
+    return recipeArr;
 }
 
-searchInput.addEventListener('input', handlerecipe);
+searchInput.addEventListener('input', () => {
+    displayRecipes(handlerecipe());
+});
 
 function displayTagsList() {
     ingredientsList.innerHTML = tagsList(ingrediantsTags(recipes));
