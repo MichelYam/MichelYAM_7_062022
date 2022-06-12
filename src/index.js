@@ -55,20 +55,23 @@ function handleRecipe() {
             }
 
             // filter ingredient
-            if (recipe.ingredients.find((ingredient) => ingredient.ingredient.includes(inputValue))) {
+            if (recipe.ingredients.find((item) => item.ingredient.toLowerCase()
+                .includes(inputValue))) {
                 return true;
             }
 
             // const ingredientsListArr = recipe.ingredients.filter((element) => {
             //     const ingredientLowerCase = element.ingredient.toLowerCase();
-            //     return ingredientLowerCase.includes(inputValue);
+            //     // console.log(element);
+            //     console.log(element.ingredient.indexOf(ingredientLowerCase));
+            //     // return ingredientLowerCase.includes(inputValue);
             // });
 
+            // console.log(ingredientsListArr);
             // if (ingredientsListArr.length > 0) {
             //     return true;
             // }
         });
-        console.log(recipeArr);
         return recipeArr;
     }
     return recipes;
