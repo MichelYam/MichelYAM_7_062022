@@ -49,28 +49,16 @@ function handleRecipe() {
             const recipeName = recipe.name.toLowerCase();
             const recipeDescription = recipe.description.toLowerCase();
 
-            // filter name et description
+            // filter by name and description
             if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
                 return true;
             }
 
-            // filter ingredient
+            // filter by ingredient
             if (recipe.ingredients.find((item) => item.ingredient.toLowerCase()
                 .includes(inputValue))) {
                 return true;
             }
-
-            // const ingredientsListArr = recipe.ingredients.filter((element) => {
-            //     const ingredientLowerCase = element.ingredient.toLowerCase();
-            //     // console.log(element);
-            //     console.log(element.ingredient.indexOf(ingredientLowerCase));
-            //     // return ingredientLowerCase.includes(inputValue);
-            // });
-
-            // console.log(ingredientsListArr);
-            // if (ingredientsListArr.length > 0) {
-            //     return true;
-            // }
         });
         return recipeArr;
     }
