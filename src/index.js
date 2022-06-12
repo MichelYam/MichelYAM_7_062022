@@ -16,7 +16,6 @@ const ustensilsList = document.querySelector('#red-content ul');
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
     const itemClass = this.parentNode.parentNode.parentNode.className;
-    console.log(itemClass);
     for (let i = 0; i < filterBtn.length; i++) {
         filterBtn[i].className = 'filter-btn';
     }

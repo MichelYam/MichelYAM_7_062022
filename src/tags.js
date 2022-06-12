@@ -9,6 +9,7 @@ export function ingrediantsTags(recipes) {
     ingredientsTagsList = [...new Set(ingredientsTagsList)];
     ingredientsTagsList = ingredientsTagsList.flat();
     // console.log(ingredientsTagsList);
+    ingredientsTagsList.sort();
     return ingredientsTagsList;
 }
 
@@ -19,6 +20,7 @@ export function appliancesTags(recipes) {
     });
     appliancesTagsList = [...new Set(appliancesTagsList)];
     // console.log(appliancesTagsList);
+    appliancesTagsList.sort();
     return appliancesTagsList;
 }
 
@@ -31,6 +33,7 @@ export function ustensilsTags(recipes) {
     });
     ustensilsTagsList = [...new Set(ustensilsTagsList)];
     // console.log(ustensilsTagsList);
+    ustensilsTagsList.sort();
     return ustensilsTagsList;
 }
 
