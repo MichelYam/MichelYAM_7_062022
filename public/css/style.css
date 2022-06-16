@@ -90,7 +90,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 107px;
+    min-width: 107px;
     height: 37px;
     border-radius: 5px;
     padding: 10px 15px;
@@ -101,6 +101,7 @@ section {
 svg {
     cursor: pointer;
     filter: invert(100%) sepia(91%) saturate(38%) hue-rotate(359deg) brightness(109%) contrast(111%);
+    margin-left: 6px;
 }
 
 /* filters */
