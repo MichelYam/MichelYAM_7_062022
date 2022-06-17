@@ -51,28 +51,27 @@ function displayRecipes(recipe) {
 }
 
 function handleRecipe() {
-    const array = [];
     const inputValue = searchInput.value.toLowerCase();
     if (inputValue.length >= 3) {
-        recipes.forEach((recipe) => {
+        const recipeArr = recipes.filter((recipe) => {
             const recipeName = recipe.name.toLowerCase();
             const recipeDescription = recipe.description.toLowerCase();
 
             // filter by name and description
             if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
-                array.push(recipe);
+                return true;
             }
 
             // filter by ingredient
             if (recipe.ingredients.find((item) => item.ingredient.toLowerCase()
                 .includes(inputValue))) {
-                array.push(recipe);
+                return true;
             }
-            // return false;
+            return false;
         });
-        // return array;
+        return recipeArr;
     }
-    return array;
+    return recipes;
 }
 
 function displayTagsList() {
@@ -106,6 +105,7 @@ function renderTags(tags) {
         });
     });
 }
+
 function removeTag(e) {
     // Supprime le tag lors du click
     tagsArray = tagsArray.filter(
@@ -198,6 +198,7 @@ function handleTagsChecked() {
     allItems.forEach((elem) => {
         elem.addEventListener('click', (e) => {
             addTag(e);
+            alert('test');
         });
     });
 }
