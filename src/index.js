@@ -67,7 +67,6 @@ function handleRecipe() {
                 .includes(inputValue))) {
                 return true;
             }
-            return false;
         });
         return recipeArr;
     }
