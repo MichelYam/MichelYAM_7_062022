@@ -287,10 +287,12 @@ svg {
     .filter-btn {
         margin-right: 0px;
     }
-    .recipe__list{
+
+    .recipe__list {
         gap: 20px;
     }
-    .recipe__card{
+
+    .recipe__card {
         width: 100%;
     }
 }
