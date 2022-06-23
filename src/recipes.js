@@ -2,9 +2,9 @@ export default function getAllRecipes(recipes) {
     function recipeIngredients(item) {
         let ingredientList = '';
         if (item.unit && item.quantity) {
-            ingredientList = `<li>${item.ingredient} ${item.quantity}${item.unit}</li>`;
+            ingredientList = `<li>${item.ingredient}: ${item.quantity}${item.unit}</li>`;
         } else if (item.quantity && !item.unit) {
-            ingredientList = `<li>${item.ingredient} ${item.quantity}</li>`;
+            ingredientList = `<li>${item.ingredient}: ${item.quantity}</li>`;
         } else {
             ingredientList = `<li>${item.ingredient}</li>`;
         }

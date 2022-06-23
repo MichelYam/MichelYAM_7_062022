@@ -300,7 +300,11 @@ svg {
     }
 
     .filter-btn {
+        width: 100%;
         margin-right: 0px;
+    }
+    .filter-btn.active{
+        z-index: 2;
     }
 
     .recipe__list {
