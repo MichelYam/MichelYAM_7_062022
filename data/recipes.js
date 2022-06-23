@@ -359,7 +359,7 @@ const recipes = [
         "time": 60,
         "description": "Commencer par cuire les pommes de terre dans l'eau bouillante. Puis epluchez les et coupez les en rondelles. Emincer les oignons puis les faire dorer dans du beurre. Ajouter le jambon fumé coupé en en morceaux ainsi que les pommes de terres. Salez, poivrez à votre gout ( et celui de vos convives ) Laissez cuisiner durant environ 10 minutes puis ajouter le vin blanc. Après 5 minutes, mettre le tout dans un plat à gratin. Coupez le rebelochon, soit en tranches, soit le couper en 2 dans le sens de l'épaisseur et recouvrir les pommes de terre. Cuire au four (environ 220°) durant 25 minutes. C'est prêt !",
         "appliance": "Four",
-        "ustensils": ["plat à gratin", "couteau", "Économe"]
+        "ustensils": ["plat à gratin", "couteau", "économe"]
     }, {
         "id": 11,
         "name": "Salade tomate, mozzarella et pommes",
@@ -425,7 +425,7 @@ const recipes = [
         ],
         "time": 40,
         "description": "Éplucher les fruits et les couper en morceaux, les mettre dans une casserole en ajoutant l'eau et le sucre vanillé. Laisser cuire 15 minutes en remuant régulièrement.",
-        "appliance": "Casserole",
+        "appliance": "casserole",
         "ustensils": ["couteau", "économe"]
     },
     {
@@ -461,7 +461,7 @@ const recipes = [
         ],
         "time": 40,
         "description": "Cuire les pommes de terre environ 30 minutes. Découper les échalottes finement. Durant la cuisson des pommes de terre. Préparez la vinaigrette avec l'huile d'olive et le vinaigre de cidre. Salez poivrez à discrétion. Dans un saladier, mettre le mâche. Ajouter",
-        "appliance": "Casserole",
+        "appliance": "casserole",
         "ustensils": ["couteau", "saladier", "cuillère en bois"]
     },
     {
@@ -742,7 +742,7 @@ const recipes = [
         ],
         "time": 30,
         "description": "Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraîche à la viande hachée. Serivir.",
-        "appliance": "casserole.",
+        "appliance": "casserole",
         "ustensils": ["Cuillère en bois", "louche", "couteau"]
     },
     {
@@ -1516,7 +1516,7 @@ const recipes = [
         ],
         "time": 15,
         "description": "Mélanger la farine et le beurre fondu en ajoutant le lait peu à peu. Ajouter du sucre après la cuisson. Bien mélanger. Ajouter le chocolat en morceaux et laisser chauffer 8 minutes en mélangeant avec une cuillère en bois. Mettre dans des verres",
-        "appliance": "Casserole",
+        "appliance": "casserole",
         "ustensils": ["cuillère en bois"]
     },
     {

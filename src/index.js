@@ -93,7 +93,6 @@ function handleRecipe() {
 }
 
 function displayTagsList() {
-    //ici
     const recipesList = handleRecipe();
     ingredientsList.innerHTML = filterList(ingrediantsTags(recipesList));
     appliancesList.innerHTML = filterList(appliancesTags(recipesList));
