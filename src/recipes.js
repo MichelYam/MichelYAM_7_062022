@@ -1,4 +1,14 @@
+/**
+ * Retourne la structure HTML de toutes les recettes passés en paramètre
+ * @param {array} recipes;
+ * @returns html
+ */
 export default function getAllRecipes(recipes) {
+    /**
+     * Check les ingredients
+     * @param {array} item ;
+     * @returns Html structure
+     */
     function recipeIngredients(item) {
         let ingredientList = '';
         if (item.unit && item.quantity) {

@@ -288,7 +288,7 @@ svg {
     white-space: normal;
 }
 
-
+/* responsive mobile */
 @media screen and (max-width: 577px) {
     .tags__card {
         margin-bottom: 10px;
@@ -315,6 +315,7 @@ svg {
     }
 }
 
+/* responsive tablette */
 @media screen and (max-width: 947px) {
     header img {
         width: 50%;

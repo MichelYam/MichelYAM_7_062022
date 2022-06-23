@@ -1,4 +1,10 @@
 /* eslint-disable array-callback-return */
+
+/**
+ * Retourne les ingrédients passés en paramètre
+ * @param {array} recipes ;
+ * @returns ingrdiant object
+ */
 export function ingrediantsTags(recipes) {
     let ingredientsTagsList = [];
     recipes.map((item) => {
@@ -12,7 +18,11 @@ export function ingrediantsTags(recipes) {
     ingredientsTagsList.sort();
     return ingredientsTagsList;
 }
-
+/**
+ * Retourne les appareils passés en paramètre
+ * @param {array} recipes ;
+ * @returns appliances object
+ */
 export function appliancesTags(recipes) {
     let appliancesTagsList = [];
     recipes.map((item) => {
@@ -23,7 +33,11 @@ export function appliancesTags(recipes) {
     appliancesTagsList.sort();
     return appliancesTagsList;
 }
-
+/**
+ * Retourne les ustencils passés en paramètre
+ * @param {array} recipes ;
+ * @returns ustencils object
+ */
 export function ustensilsTags(recipes) {
     let ustensilsTagsList = [];
     recipes.map((item) => {
@@ -37,12 +51,21 @@ export function ustensilsTags(recipes) {
     return ustensilsTagsList;
 }
 
+/**
+ * 
+ * @param {array} recipes ;
+ * @returns 
+ */
 export function filterList(recipes) {
     return recipes.map((recipe) => (
         ` <li class="dropdown-item">${recipe.charAt(0).toUpperCase() + recipe.slice(1)}</li>`
     )).join('');
 }
-
+/**
+ * Création des tags
+ * @param {array} tag ;
+ * @returns html dom
+ */
 export function tagsList(tag) {
     const tagItem = document.createElement('div');
     tagItem.setAttribute('class', 'tags__card');
@@ -56,6 +79,12 @@ export function tagsList(tag) {
     return tagItem;
 }
 
+/**
+ * Retournes toutes les valeurs de ce que l'utilisateur à écrit
+ * @param {string} input
+ * @param {array} array
+ * @returns array
+ */
 export const test = (input, array) => {
     const inputLower = input.value.toLowerCase();
     const newArr = array.filter((item) => {

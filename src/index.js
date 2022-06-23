@@ -25,6 +25,9 @@ const ustesilsInput = document.getElementById('ustensiles-input');
 let tagsArray = [];
 let filterTags = recipes;
 
+/**
+ * Gére l'ouverture du dropwDonw des filtres avancés
+ */
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
     const itemClass = this.parentNode.parentNode.parentNode.className;
@@ -36,6 +39,9 @@ function toggleItem() {
     }
 }
 
+/**
+ * Gére l'évenement du click sur les filtres avancés
+ */
 function handleDownMenu() {
     // handle open/close filters
     const arrow = document.querySelectorAll('.fa-angle-down');
@@ -45,11 +51,7 @@ function handleDownMenu() {
         label[i].addEventListener('click', toggleItem, false);
     }
 }
-// window.onclick = function (event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+
 window.addEventListener('click', (e) => {
     const filterBtn = document.querySelectorAll('.filter-btn');
 
@@ -60,6 +62,10 @@ window.addEventListener('click', (e) => {
     });
 });
 
+/**
+ * Affichage des recettes
+ * @param {array} recipe
+ */
 function displayRecipes(recipe) {
     const recipeSection = document.querySelector('.recipe__list');
     if (recipe.length > 0) {
@@ -69,6 +75,10 @@ function displayRecipes(recipe) {
     }
 }
 
+/**
+ * Recherche principale
+ * @returns array
+ */
 function handleRecipe() {
     const inputValue = searchInput.value.toLowerCase();
     if (inputValue.length >= 3) {
@@ -92,6 +102,9 @@ function handleRecipe() {
     return recipes;
 }
 
+/**
+ * affichage des tags
+ */
 function displayTagsList() {
     const recipesList = handleRecipe();
     ingredientsList.innerHTML = filterList(ingrediantsTags(recipesList));
@@ -100,6 +113,7 @@ function displayTagsList() {
     handleTagsChecked();
 }
 
+ // gére l'évènement du clique
 searchInput.addEventListener('input', () => {
     displayRecipes(handleRecipe());
     displayTagsList();
@@ -128,6 +142,10 @@ function renderTags(tags) {
     });
 }
 
+/**
+ * Supprime le tag séléctionné
+ * @param {object} tagItem
+ */
 function removeTag(tagItem) {
     // Supprime le tag lors du click
     tagsArray = tagsArray.filter(
@@ -149,7 +167,10 @@ function removeTag(tagItem) {
     // affiche les tags dans les filtres respectifs
     renderTags(tagsArray);
 }
-
+/**
+ * Ajoute du tag séléctioné
+ * @param {event} e
+ */
 function addTag(e) {
     // creation d'objet
     const newTag = {
@@ -176,8 +197,15 @@ function addTag(e) {
     // console.log(tagsArray);
 }
 
-// recuperer toutes les recettes  en fonction de l'ingredient dans les tags
+/**
+ * recuperer toutes les recettes en fonction de l'ingredient dans les tags
+ * @returns array
+ */
 function filterRecipeByTag() {
+    /*
+        En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
+        correspondant
+    */
     tagsArray.forEach((tag) => {
         switch (tag.type) {
             case 'ingredients':
@@ -204,12 +232,15 @@ function filterRecipeByTag() {
 
 /**
  * affiche du nouveau filtre ingredient
- * @param {*} arr ;
+ * @param {array} arr ;
  */
 function updateFilterListData() {
+    // retourne les elements de chaque filtre
     let filterIngre = ingrediantsTags(filterTags);
     let filterAppli = appliancesTags(filterTags);
     let filterUsten = ustensilsTags(filterTags);
+
+    // retourne tous les elements ne correspondant pas aux tags sélectionés
     tagsArray.forEach((item) => {
         filterIngre = filterIngre.filter(
             (tag) => tag !== item.name,
@@ -226,12 +257,17 @@ function updateFilterListData() {
         );
     });
 
+    // Affichage les éléments filtré
     ingredientsList.innerHTML = filterList(filterIngre);
     appliancesList.innerHTML = filterList(filterAppli);
     ustensilsList.innerHTML = filterList(filterUsten);
+    // ajoute l'évènement click pour chaque éléments
     handleTagsChecked();
 }
 
+/**
+ * ajout de l'évènement click a tous les éléments de filtres avancés
+ */
 function handleTagsChecked() {
     // recuperes tous les li
     const allItems = document.querySelectorAll('.dropdown-item');
