@@ -20,6 +20,7 @@ export default function getAllRecipes(recipes) {
         }
         return ingredientList;
     }
+
     return recipes.map((recipe) => (
         ` <article class="recipe__card">
             <div class="img"></div>

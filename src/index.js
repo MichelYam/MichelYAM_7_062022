@@ -1,6 +1,4 @@
-/* eslint-disable indent */
 /* eslint-disable no-use-before-define */
-/* eslint-disable no-plusplus */
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
 import {
@@ -31,7 +29,7 @@ let filterTags = recipes;
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
     const itemClass = this.parentNode.parentNode.parentNode.className;
-    for (let i = 0; i < filterBtn.length; i++) {
+    for (let i = 0; i < filterBtn.length; i += 1) {
         filterBtn[i].className = 'filter-btn';
     }
     if (itemClass === 'filter-btn') {
@@ -46,7 +44,7 @@ function handleDownMenu() {
     // handle open/close filters
     const arrow = document.querySelectorAll('.fa-angle-down');
     const label = document.querySelectorAll('.filter-title');
-    for (let i = 0; i < arrow.length; i++) {
+    for (let i = 0; i < arrow.length; i += 1) {
         arrow[i].addEventListener('click', toggleItem, false);
         label[i].addEventListener('click', toggleItem, false);
     }
@@ -81,23 +79,43 @@ function displayRecipes(recipe) {
  */
 function handleRecipe() {
     const inputValue = searchInput.value.toLowerCase();
+    const array = [];
     if (inputValue.length >= 3) {
-        const recipeArr = recipes.filter((recipe) => {
+        // const recipeArr = recipes.filter((recipe) => {
+        //     const recipeName = recipe.name.toLowerCase();
+        //     const recipeDescription = recipe.description.toLowerCase();
+
+        //     // filter by name and description
+        //     if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
+        //         return true;
+        //     }
+
+        //     // filter by ingredient
+        //     if (recipe.ingredients.find((item) => item.ingredient.toLowerCase()
+        //         .includes(inputValue))) {
+        //         return true;
+        //     }
+        // });
+        // return recipeArr;
+        recipes.forEach((recipe) => {
             const recipeName = recipe.name.toLowerCase();
             const recipeDescription = recipe.description.toLowerCase();
 
             // filter by name and description
             if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
-                return true;
+                array.push(recipe);
             }
 
             // filter by ingredient
             if (recipe.ingredients.find((item) => item.ingredient.toLowerCase()
                 .includes(inputValue))) {
-                return true;
+                if (!array.includes(recipe)) {
+                    array.push(recipe);
+                }
             }
         });
-        return recipeArr;
+        // return recipeArr;
+        return array;
     }
     return recipes;
 }
@@ -113,7 +131,7 @@ function displayTagsList() {
     handleTagsChecked();
 }
 
- // gére l'évènement du clique
+// gére l'évènement du clique
 searchInput.addEventListener('input', () => {
     displayRecipes(handleRecipe());
     displayTagsList();
@@ -129,17 +147,71 @@ ustesilsInput.addEventListener('input', () => {
     ustensilsList.innerHTML = filterList(test(ustesilsInput, ustensilsTags(recipes)));
 });
 
-function renderTags(tags) {
-    // console.log(tags);
-    const tagsSection = document.querySelector('.tags__list');
-    tagsSection.innerHTML = '';
-    tags.forEach((item) => {
-        const tag = tagsList(item);
-        tag.querySelector('svg').addEventListener('click', () => {
-            removeTag(item);
-        });
-        tagsSection.append(tag);
+/**
+ * recuperer toutes les recettes en fonction de l'ingredient dans les tags
+ * @returns array
+ */
+function filterRecipeByTag() {
+    /*
+        En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
+        correspondant
+    */
+    tagsArray.forEach((tag) => {
+        switch (tag.type) {
+            case 'ingredients':
+                filterTags = filterTags.filter((recipe) => (
+                    recipe.ingredients.some((ingredient) => (
+                        ingredient.ingredient.toLowerCase().includes(tag.name.toLowerCase())))));
+                break;
+            case 'devices':
+                filterTags = filterTags.filter((recipe) => recipe.appliance.toLowerCase()
+                    .includes(tag.name.toLowerCase()));
+                break;
+            case 'utensils':
+                filterTags = filterTags.filter((recipe) => (
+                    recipe.ustensils.some((ustensil) => (
+                        ustensil.toLowerCase().includes(tag.name.toLowerCase())))));
+                break;
+            default:
+                console.log('failed');
+        }
     });
+    // console.log(filterTags);
+    return filterTags;
+}
+/**
+ * affiche du nouveau filtre ingredient
+ * @param {array} arr ;
+ */
+function updateFilterListData() {
+    // retourne les elements de chaque filtre
+    let filterIngre = ingrediantsTags(filterTags);
+    let filterAppli = appliancesTags(filterTags);
+    let filterUsten = ustensilsTags(filterTags);
+
+    // retourne tous les elements ne correspondant pas aux tags sélectionés
+    tagsArray.forEach((item) => {
+        filterIngre = filterIngre.filter(
+            (tag) => tag !== item.name,
+        );
+    });
+    tagsArray.forEach((item) => {
+        filterAppli = filterAppli.filter(
+            (tag) => tag !== item.name,
+        );
+    });
+    tagsArray.forEach((item) => {
+        filterUsten = filterUsten.filter(
+            (tag) => tag !== item.name,
+        );
+    });
+
+    // Affichage les éléments filtré
+    ingredientsList.innerHTML = filterList(filterIngre);
+    appliancesList.innerHTML = filterList(filterAppli);
+    ustensilsList.innerHTML = filterList(filterUsten);
+    // ajoute l'évènement click pour chaque éléments
+    handleTagsChecked();
 }
 
 /**
@@ -197,72 +269,17 @@ function addTag(e) {
     // console.log(tagsArray);
 }
 
-/**
- * recuperer toutes les recettes en fonction de l'ingredient dans les tags
- * @returns array
- */
-function filterRecipeByTag() {
-    /*
-        En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
-        correspondant
-    */
-    tagsArray.forEach((tag) => {
-        switch (tag.type) {
-            case 'ingredients':
-                filterTags = filterTags.filter((recipe) => (
-                    recipe.ingredients.some((ingredient) => (
-                        ingredient.ingredient.toLowerCase().includes(tag.name.toLowerCase())))));
-                break;
-            case 'devices':
-                filterTags = filterTags.filter((recipe) => recipe.appliance.toLowerCase()
-                    .includes(tag.name.toLowerCase()));
-                break;
-            case 'utensils':
-                filterTags = filterTags.filter((recipe) => (
-                    recipe.ustensils.some((ustensil) => (
-                        ustensil.toLowerCase().includes(tag.name.toLowerCase())))));
-                break;
-            default:
-                console.log('failed');
-        }
+function renderTags(tags) {
+    // console.log(tags);
+    const tagsSection = document.querySelector('.tags__list');
+    tagsSection.innerHTML = '';
+    tags.forEach((item) => {
+        const tag = tagsList(item);
+        tag.querySelector('svg').addEventListener('click', () => {
+            removeTag(item);
+        });
+        tagsSection.append(tag);
     });
-    // console.log(filterTags);
-    return filterTags;
-}
-
-/**
- * affiche du nouveau filtre ingredient
- * @param {array} arr ;
- */
-function updateFilterListData() {
-    // retourne les elements de chaque filtre
-    let filterIngre = ingrediantsTags(filterTags);
-    let filterAppli = appliancesTags(filterTags);
-    let filterUsten = ustensilsTags(filterTags);
-
-    // retourne tous les elements ne correspondant pas aux tags sélectionés
-    tagsArray.forEach((item) => {
-        filterIngre = filterIngre.filter(
-            (tag) => tag !== item.name,
-        );
-    });
-    tagsArray.forEach((item) => {
-        filterAppli = filterAppli.filter(
-            (tag) => tag !== item.name,
-        );
-    });
-    tagsArray.forEach((item) => {
-        filterUsten = filterUsten.filter(
-            (tag) => tag !== item.name,
-        );
-    });
-
-    // Affichage les éléments filtré
-    ingredientsList.innerHTML = filterList(filterIngre);
-    appliancesList.innerHTML = filterList(filterAppli);
-    ustensilsList.innerHTML = filterList(filterUsten);
-    // ajoute l'évènement click pour chaque éléments
-    handleTagsChecked();
 }
 
 /**
