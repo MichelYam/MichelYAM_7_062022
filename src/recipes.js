@@ -4,6 +4,7 @@
  * @returns html
  */
 export default function getAllRecipes(recipes) {
+    const filterByTitle = recipes.sort((a, b) => (a.name < b.name ? -1 : 1));
     /**
      * Check les ingredients
      * @param {array} item ;
@@ -21,7 +22,7 @@ export default function getAllRecipes(recipes) {
         return ingredientList;
     }
 
-    return recipes.map((recipe) => (
+    return filterByTitle.map((recipe) => (
         ` <article class="recipe__card">
             <div class="img"></div>
             <div class="recipes__card-content">
