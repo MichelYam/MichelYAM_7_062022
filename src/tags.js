@@ -90,5 +90,6 @@ export const test = (input, array) => {
         }
         return false;
     });
+
     return newArr;
 }
