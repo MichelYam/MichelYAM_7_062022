@@ -50,16 +50,6 @@ function handleDownMenu() {
     }
 }
 
-window.addEventListener('click', (e) => {
-    const filterBtn = document.querySelectorAll('.filter-btn');
-
-    filterBtn.forEach((item) => {
-        if (item.classList.contains('active') && e.target === document.querySelector('body')) {
-            console.log('test');
-        }
-    });
-});
-
 /**
  * Affichage des recettes
  * @param {array} recipe
@@ -123,12 +113,17 @@ searchInput.addEventListener('input', () => {
 
 ingredientInput.addEventListener('input', () => {
     ingredientsList.innerHTML = filterList(test(ingredientInput, ingrediantsTags(recipes)));
+    handleTagsChecked();
 });
+
 deviceInput.addEventListener('input', () => {
     appliancesList.innerHTML = filterList(test(deviceInput, appliancesTags(recipes)));
+    handleTagsChecked();
 });
+
 ustesilsInput.addEventListener('input', () => {
     ustensilsList.innerHTML = filterList(test(ustesilsInput, ustensilsTags(recipes)));
+    handleTagsChecked();
 });
 
 /**
