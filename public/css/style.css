@@ -207,7 +207,7 @@ svg {
 .recipe__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     font-size: 22px;
     gap: 30px;
 }
