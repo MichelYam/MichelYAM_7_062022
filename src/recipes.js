@@ -3,7 +3,7 @@
  * @param {array} recipes;
  * @returns html
  */
- export default function getAllRecipes(recipes) {
+export default function getAllRecipes(recipes) {
     const filterByTitle = recipes.sort((a, b) => (a.name < b.name ? -1 : 1));
     /**
      * Check les ingredients
