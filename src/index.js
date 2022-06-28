@@ -123,13 +123,19 @@ searchInput.addEventListener('input', () => {
 
 ingredientInput.addEventListener('input', () => {
     ingredientsList.innerHTML = filterList(test(ingredientInput, ingrediantsTags(recipes)));
+    handleTagsChecked();
 });
+
 deviceInput.addEventListener('input', () => {
     appliancesList.innerHTML = filterList(test(deviceInput, appliancesTags(recipes)));
+    handleTagsChecked();
 });
+
 ustesilsInput.addEventListener('input', () => {
     ustensilsList.innerHTML = filterList(test(ustesilsInput, ustensilsTags(recipes)));
+    handleTagsChecked();
 });
+
 
 /**
  * recuperer toutes les recettes en fonction de l'ingredient dans les tags
