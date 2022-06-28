@@ -1,10 +1,9 @@
-/* eslint-disable array-callback-return */
 /**
  * Retourne les ingrédients passés en paramètre
  * @param {array} recipes ;
  * @returns ingrdiant object
  */
-export function ingrediantsTags(recipes) {
+ export function ingrediantsTags(recipes) {
     let ingredientsTagsList = [];
     recipes.map((item) => (
         item.ingredients.map((element) => (
