@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable indent */
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
 import {
@@ -7,7 +7,7 @@ import {
     ustensilsTags,
     tagsList,
     filterList,
-    test,
+    getItemsFilter,
 } from './tags.js';
 
 const searchInput = document.getElementById('search');
@@ -112,17 +112,17 @@ searchInput.addEventListener('input', () => {
 });
 
 ingredientInput.addEventListener('input', () => {
-    ingredientsList.innerHTML = filterList(test(ingredientInput, ingrediantsTags(recipes)));
+    ingredientsList.innerHTML = filterList(getItemsFilter(ingredientInput, ingrediantsTags(recipes)));
     handleTagsChecked();
 });
 
 deviceInput.addEventListener('input', () => {
-    appliancesList.innerHTML = filterList(test(deviceInput, appliancesTags(recipes)));
+    appliancesList.innerHTML = filterList(getItemsFilter(deviceInput, appliancesTags(recipes)));
     handleTagsChecked();
 });
 
 ustesilsInput.addEventListener('input', () => {
-    ustensilsList.innerHTML = filterList(test(ustesilsInput, ustensilsTags(recipes)));
+    ustensilsList.innerHTML = filterList(getItemsFilter(ustesilsInput, ustensilsTags(recipes)));
     handleTagsChecked();
 });
 
@@ -160,7 +160,7 @@ function filterRecipeByTag() {
 }
 /**
  * affiche du nouveau filtre ingredient
- * @param {array} arr ;
+ * @param {array} arr
  */
 function updateFilterListData() {
     // retourne les elements de chaque filtre
