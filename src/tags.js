@@ -1,9 +1,31 @@
+export function testaze(recipes) {
+    let ingredientsTagsList = [];
+    let ustensilsTagsList = [];
+    let appliancesTagsList = [];
+    recipes.map((item) => {
+        item.ingredients.map((element) => (
+            ingredientsTagsList.push(element.ingredient)
+        ));
+
+        item.ustensils.map((element) => (
+            ustensilsTagsList.push(element)
+        ));
+
+        appliancesTagsList.push(item.appliance);
+    });
+
+    ingredientsTagsList = [...new Set(ingredientsTagsList)].sort();
+    appliancesTagsList = [...new Set(appliancesTagsList)].sort();
+    ustensilsTagsList = [...new Set(ustensilsTagsList)].sort();
+    return [ingredientsTagsList, appliancesTagsList, ustensilsTagsList];
+}
+
 /**
  * Retourne les ingrédients passés en paramètre
  * @param {array} recipes ;
  * @returns ingrdiant object
  */
-export function ingrediantsTags(recipes) {
+export function ingredientsTags(recipes) {
     let ingredientsTagsList = [];
     recipes.map((item) => (
         item.ingredients.map((element) => (
@@ -16,6 +38,7 @@ export function ingrediantsTags(recipes) {
     ingredientsTagsList.sort();
     return ingredientsTagsList;
 }
+
 /**
  * Retourne les appareils passés en paramètre
  * @param {array} recipes ;
@@ -30,6 +53,7 @@ export function appliancesTags(recipes) {
     appliancesTagsList.sort();
     return appliancesTagsList;
 }
+
 /**
  * Retourne les ustencils passés en paramètre
  * @param {array} recipes ;
@@ -64,6 +88,7 @@ export function filterList(recipes) {
  * @param {array} tag ;
  * @returns html dom
  */
+
 export function tagsList(tag) {
     const tagItem = document.createElement('div');
     tagItem.setAttribute('class', 'tags__card');

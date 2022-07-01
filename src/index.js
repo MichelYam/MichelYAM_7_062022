@@ -1,13 +1,12 @@
 /* eslint-disable indent */
+/* eslint-disable no-use-before-define */
 import recipes from '../data/recipes.js';
 import getAllRecipes from './recipes.js';
 import {
-    ingrediantsTags,
-    appliancesTags,
-    ustensilsTags,
     tagsList,
     filterList,
     getItemsFilter,
+    testaze,
 } from './tags.js';
 
 const searchInput = document.getElementById('search');
@@ -18,7 +17,7 @@ const ustensilsList = document.querySelector('#red-content ul');
 
 const ingredientInput = document.getElementById('ingredients-input');
 const deviceInput = document.getElementById('devices-input');
-const ustesilsInput = document.getElementById('ustensiles-input');
+const ustensilsInput = document.getElementById('ustensils-input');
 
 let tagsArray = [];
 let filterTags = recipes;
@@ -99,10 +98,12 @@ function handleRecipe() {
  */
 function displayTagsList() {
     const recipesList = handleRecipe();
-    ingredientsList.innerHTML = filterList(ingrediantsTags(recipesList));
-    appliancesList.innerHTML = filterList(appliancesTags(recipesList));
-    ustensilsList.innerHTML = filterList(ustensilsTags(recipesList));
-    handleTagsChecked();
+    const [filterIngre, filterAppli, filterUsten] = testaze(recipesList);
+
+    ingredientsList.innerHTML = filterList(filterIngre);
+    appliancesList.innerHTML = filterList(filterAppli);
+    ustensilsList.innerHTML = filterList(filterUsten);
+    addEventOnTag();
 }
 
 // gére l'évènement du clique
@@ -111,19 +112,38 @@ searchInput.addEventListener('input', () => {
     displayTagsList();
 });
 
+function handleFilterInput(input, list, type) {
+    const [filterIngre, filterAppli, filterUsten] = testaze(recipes);
+    let item;
+    switch (type) {
+        case 'ingredients':
+            item = getItemsFilter(input, filterIngre);
+
+            break;
+        case 'devices':
+            item = getItemsFilter(input, filterAppli);
+
+            break;
+        case 'ustensils':
+            item = getItemsFilter(input, filterUsten);
+
+            break;
+        default:
+            console.log('failed');
+    }
+    // eslint-disable-next-line no-param-reassign
+    list.innerHTML = filterList(item);
+    addEventOnTag();
+}
+
 ingredientInput.addEventListener('input', () => {
-    ingredientsList.innerHTML = filterList(getItemsFilter(ingredientInput, ingrediantsTags(recipes)));
-    handleTagsChecked();
+    handleFilterInput(ingredientInput, ingredientsList, 'ingredients');
 });
-
 deviceInput.addEventListener('input', () => {
-    appliancesList.innerHTML = filterList(getItemsFilter(deviceInput, appliancesTags(recipes)));
-    handleTagsChecked();
+    handleFilterInput(deviceInput, appliancesList, 'devices');
 });
-
-ustesilsInput.addEventListener('input', () => {
-    ustensilsList.innerHTML = filterList(getItemsFilter(ustesilsInput, ustensilsTags(recipes)));
-    handleTagsChecked();
+ustensilsInput.addEventListener('input', () => {
+    handleFilterInput(ustensilsInput, ustensilsList, 'ustensils');
 });
 
 /**
@@ -131,10 +151,9 @@ ustesilsInput.addEventListener('input', () => {
  * @returns array
  */
 function filterRecipeByTag() {
-    /*
-        En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
-        correspondant
-    */
+    /* En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
+    correspondant */
+
     tagsArray.forEach((tag) => {
         switch (tag.type) {
             case 'ingredients':
@@ -146,7 +165,7 @@ function filterRecipeByTag() {
                 filterTags = filterTags.filter((recipe) => recipe.appliance.toLowerCase()
                     .includes(tag.name.toLowerCase()));
                 break;
-            case 'utensils':
+            case 'ustensils':
                 filterTags = filterTags.filter((recipe) => (
                     recipe.ustensils.some((ustensil) => (
                         ustensil.toLowerCase().includes(tag.name.toLowerCase())))));
@@ -158,46 +177,35 @@ function filterRecipeByTag() {
     // console.log(filterTags);
     return filterTags;
 }
+function checkTags(filterTag) {
+    tagsArray.forEach((item) => {
+        filterTag = filterTag.filter(
+            (tag) => tag.toLowerCase() !== item.name.toLowerCase(),
+        );
+    });
+    return filterTag;
+}
 /**
  * affiche du nouveau filtre ingredient
  * @param {array} arr
  */
 function updateFilterListData() {
     // retourne les elements de chaque filtre
-    let filterIngre = ingrediantsTags(filterTags);
-    let filterAppli = appliancesTags(filterTags);
-    let filterUsten = ustensilsTags(filterTags);
-
-    // retourne tous les elements ne correspondant pas aux tags sélectionés
-    tagsArray.forEach((item) => {
-        filterIngre = filterIngre.filter(
-            (tag) => tag !== item.name,
-        );
-    });
-    tagsArray.forEach((item) => {
-        filterAppli = filterAppli.filter(
-            (tag) => tag !== item.name,
-        );
-    });
-    tagsArray.forEach((item) => {
-        filterUsten = filterUsten.filter(
-            (tag) => tag !== item.name,
-        );
-    });
+    const [filterIngre, filterAppli, filterUsten] = testaze(filterTags);
 
     // Affichage les éléments filtré
-    ingredientsList.innerHTML = filterList(filterIngre);
-    appliancesList.innerHTML = filterList(filterAppli);
-    ustensilsList.innerHTML = filterList(filterUsten);
+    ingredientsList.innerHTML = filterList(checkTags(filterIngre));
+    appliancesList.innerHTML = filterList(checkTags(filterAppli));
+    ustensilsList.innerHTML = filterList(checkTags(filterUsten));
     // ajoute l'évènement click pour chaque éléments
-    handleTagsChecked();
+    addEventOnTag();
 }
 
 /**
  * Supprime le tag séléctionné
  * @param {object} tagItem
  */
-function removeTag(tagItem) {
+export default function removeTag(tagItem) {
     // Supprime le tag lors du click
     tagsArray = tagsArray.filter(
         (tag) => tag.name !== tagItem.name,
@@ -218,6 +226,7 @@ function removeTag(tagItem) {
     // affiche les tags dans les filtres respectifs
     renderTags(tagsArray);
 }
+
 /**
  * Ajoute du tag séléctioné
  * @param {event} e
@@ -244,8 +253,6 @@ function addTag(e) {
         // Mets a jour les filtres
         updateFilterListData();
     }
-
-    // console.log(tagsArray);
 }
 
 function renderTags(tags) {
@@ -264,7 +271,7 @@ function renderTags(tags) {
 /**
  * ajout de l'évènement click a tous les éléments de filtres avancés
  */
-function handleTagsChecked() {
+function addEventOnTag() {
     // recuperes tous les li
     const allItems = document.querySelectorAll('.dropdown-item');
     allItems.forEach((elem) => {
