@@ -23,7 +23,7 @@ let tagsArray = [];
 let filterTags = recipes;
 
 /**
- * Gére l'ouverture du dropwDonw des filtres avancés
+ * Gére l'ouverture du dropwDonw menu des filtres avancés
  */
 function toggleItem() {
     const filterBtn = document.querySelectorAll('.filter-btn');
@@ -58,7 +58,7 @@ function displayRecipes(recipe) {
     if (recipe.length > 0) {
         recipeSection.innerHTML = getAllRecipes(recipe);
     } else {
-        recipeSection.innerHTML = '« Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.';
+        recipeSection.innerHTML = '<div class="error-message">« Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</div>';
     }
 }
 

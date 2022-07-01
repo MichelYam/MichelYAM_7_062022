@@ -212,7 +212,12 @@ svg {
     font-size: 22px;
     gap: 30px;
 }
-
+.recipe__list  .error-message{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
 
 .recipe__card {
     width: 380px;
