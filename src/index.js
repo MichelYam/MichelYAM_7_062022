@@ -109,8 +109,12 @@ function displayTagsList() {
 
 // gére l'évènement du clique
 searchInput.addEventListener('input', () => {
-    displayRecipes(handleRecipe());
-    displayTagsList();
+    if (tagsArray.length === 0) {
+        displayRecipes(handleRecipe());
+        displayTagsList();
+    } else {
+        displayRecipes(filterRecipeByTag());
+    }
 });
 
 /**
@@ -150,10 +154,13 @@ function handleFilterInput(input, list, type) {
 ingredientInput.addEventListener('input', () => {
     handleFilterInput(ingredientInput, ingredientsList, 'ingredients');
 });
+
 deviceInput.addEventListener('input', () => {
     handleFilterInput(deviceInput, appliancesList, 'devices');
 });
+
 ustensilsInput.addEventListener('input', () => {
+    updateFilterListData();
     handleFilterInput(ustensilsInput, ustensilsList, 'ustensils');
 });
 
@@ -164,6 +171,8 @@ ustensilsInput.addEventListener('input', () => {
 function filterRecipeByTag() {
     /* En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
     correspondant */
+    filterTags = handleRecipe();
+    console.log(filterTags);
     tagsArray.forEach((tag) => {
         switch (tag.type) {
             case 'ingredients':
@@ -184,7 +193,7 @@ function filterRecipeByTag() {
                 console.log('failed');
         }
     });
-    // console.log(filterTags);
+    console.log(filterTags);
     return filterTags;
 }
 /**
