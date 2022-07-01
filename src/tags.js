@@ -1,8 +1,15 @@
 /* eslint-disable array-callback-return */
-export function testaze(recipes) {
+/**
+ * Récupère tous les items des différent filtres
+ * @param {array} recipes
+ * @returns Array
+ */
+export function getAllFilterItems(recipes) {
     let ingredientsTagsList = [];
     let ustensilsTagsList = [];
     let appliancesTagsList = [];
+
+    // Récupère les items correspondant a leur type
     recipes.map((item) => {
         item.ingredients.map((element) => (
             ingredientsTagsList.push(element.ingredient)
@@ -15,9 +22,11 @@ export function testaze(recipes) {
         appliancesTagsList.push(item.appliance);
     });
 
+    // Supprime les doublons
     ingredientsTagsList = [...new Set(ingredientsTagsList)].sort();
     appliancesTagsList = [...new Set(appliancesTagsList)].sort();
     ustensilsTagsList = [...new Set(ustensilsTagsList)].sort();
+
     return [ingredientsTagsList, appliancesTagsList, ustensilsTagsList];
 }
 
@@ -87,7 +96,7 @@ export function filterList(recipes) {
 /**
  * Création des tags
  * @param {array} tag ;
- * @returns html dom
+ * @returns htmlDOM
  */
 
 export function tagsList(tag) {
@@ -108,7 +117,7 @@ export function tagsList(tag) {
 }
 
 /**
- * Retournes toutes les valeurs de ce que l'utilisateur à écrit
+ * Retournes toutes les valeurs en fonction du mot
  * @param {string} input
  * @param {array} array
  * @returns array

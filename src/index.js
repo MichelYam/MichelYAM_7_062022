@@ -6,7 +6,7 @@ import {
     tagsList,
     filterList,
     getItemsFilter,
-    testaze,
+    getAllFilterItems,
 } from './tags.js';
 
 const searchInput = document.getElementById('search');
@@ -98,11 +98,12 @@ function handleRecipe() {
  */
 function displayTagsList() {
     const recipesList = handleRecipe();
-    const [filterIngre, filterAppli, filterUsten] = testaze(recipesList);
+    const [filterIngre, filterAppli, filterUsten] = getAllFilterItems(recipesList);
 
     ingredientsList.innerHTML = filterList(filterIngre);
     appliancesList.innerHTML = filterList(filterAppli);
     ustensilsList.innerHTML = filterList(filterUsten);
+
     addEventOnTag();
 }
 
@@ -111,6 +112,7 @@ searchInput.addEventListener('input', () => {
     displayRecipes(handleRecipe());
     displayTagsList();
 });
+
 /**
  * Mets à jour la liste des items en fonction du mot ajouté
  * @param {HtmlElement} input
@@ -118,7 +120,7 @@ searchInput.addEventListener('input', () => {
  * @param {String} type
  */
 function handleFilterInput(input, list, type) {
-    const [filterIngre, filterAppli, filterUsten] = testaze(recipes);
+    const [filterIngre, filterAppli, filterUsten] = getAllFilterItems(recipes);
     let item;
     switch (type) {
         case 'ingredients':
@@ -138,6 +140,7 @@ function handleFilterInput(input, list, type) {
     }
     // eslint-disable-next-line no-param-reassign
     list.innerHTML = filterList(item);
+
     addEventOnTag();
 }
 
@@ -161,7 +164,6 @@ ustensilsInput.addEventListener('input', () => {
 function filterRecipeByTag() {
     /* En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
     correspondant */
-
     tagsArray.forEach((tag) => {
         switch (tag.type) {
             case 'ingredients':
@@ -186,7 +188,7 @@ function filterRecipeByTag() {
     return filterTags;
 }
 /**
- * 
+ * enlève les items de la liste en fonction des tags ajoutés
  * @param {array} filterTag
  * @returns array
  */
@@ -205,7 +207,7 @@ function checkTags(filterTag) {
  */
 function updateFilterListData() {
     // retourne les elements de chaque filtre
-    const [filterIngre, filterAppli, filterUsten] = testaze(filterTags);
+    const [filterIngre, filterAppli, filterUsten] = getAllFilterItems(filterTags);
 
     // Affichage les éléments filtré
     ingredientsList.innerHTML = filterList(checkTags(filterIngre));
