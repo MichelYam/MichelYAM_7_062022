@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 export function testaze(recipes) {
     let ingredientsTagsList = [];
     let ustensilsTagsList = [];
@@ -20,57 +21,57 @@ export function testaze(recipes) {
     return [ingredientsTagsList, appliancesTagsList, ustensilsTagsList];
 }
 
-/**
- * Retourne les ingrédients passés en paramètre
- * @param {array} recipes ;
- * @returns ingrdiant object
- */
-export function ingredientsTags(recipes) {
-    let ingredientsTagsList = [];
-    recipes.map((item) => (
-        item.ingredients.map((element) => (
-            ingredientsTagsList.push(element.ingredient)
-        ))
-    ));
-    ingredientsTagsList = ingredientsTagsList.flat();
-    ingredientsTagsList = [...new Set(ingredientsTagsList)];
-    // console.log(ingredientsTagsList);
-    ingredientsTagsList.sort();
-    return ingredientsTagsList;
-}
+// /**
+//  * Retourne les ingrédients passés en paramètre
+//  * @param {array} recipes ;
+//  * @returns ingrdiant object
+//  */
+// export function ingredientsTags(recipes) {
+//     let ingredientsTagsList = [];
+//     recipes.map((item) => (
+//         item.ingredients.map((element) => (
+//             ingredientsTagsList.push(element.ingredient)
+//         ))
+//     ));
+//     ingredientsTagsList = ingredientsTagsList.flat();
+//     ingredientsTagsList = [...new Set(ingredientsTagsList)];
+//     // console.log(ingredientsTagsList);
+//     ingredientsTagsList.sort();
+//     return ingredientsTagsList;
+// }
 
-/**
- * Retourne les appareils passés en paramètre
- * @param {array} recipes ;
- * @returns appliances object
- */
-export function appliancesTags(recipes) {
-    let appliancesTagsList = [];
-    recipes.map((item) => (
-        appliancesTagsList.push(item.appliance)));
-    appliancesTagsList = [...new Set(appliancesTagsList)];
-    // console.log(appliancesTagsList);
-    appliancesTagsList.sort();
-    return appliancesTagsList;
-}
+// /**
+//  * Retourne les appareils passés en paramètre
+//  * @param {array} recipes ;
+//  * @returns appliances object
+//  */
+// export function appliancesTags(recipes) {
+//     let appliancesTagsList = [];
+//     recipes.map((item) => (
+//         appliancesTagsList.push(item.appliance)));
+//     appliancesTagsList = [...new Set(appliancesTagsList)];
+//     // console.log(appliancesTagsList);
+//     appliancesTagsList.sort();
+//     return appliancesTagsList;
+// }
 
-/**
- * Retourne les ustencils passés en paramètre
- * @param {array} recipes ;
- * @returns ustencils object
- */
-export function ustensilsTags(recipes) {
-    let ustensilsTagsList = [];
-    recipes.map((item) => (
-        item.ustensils.map((element) => (
-            ustensilsTagsList.push(element)
-        ))
-    ));
-    ustensilsTagsList = [...new Set(ustensilsTagsList)];
-    // console.log(ustensilsTagsList);
-    ustensilsTagsList.sort();
-    return ustensilsTagsList;
-}
+// /**
+//  * Retourne les ustencils passés en paramètre
+//  * @param {array} recipes ;
+//  * @returns ustencils object
+//  */
+// export function ustensilsTags(recipes) {
+//     let ustensilsTagsList = [];
+//     recipes.map((item) => (
+//         item.ustensils.map((element) => (
+//             ustensilsTagsList.push(element)
+//         ))
+//     ));
+//     ustensilsTagsList = [...new Set(ustensilsTagsList)];
+//     // console.log(ustensilsTagsList);
+//     ustensilsTagsList.sort();
+//     return ustensilsTagsList;
+// }
 
 /**
  * retourne l'ensemble des items du filtres

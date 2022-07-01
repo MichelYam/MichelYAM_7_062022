@@ -111,7 +111,12 @@ searchInput.addEventListener('input', () => {
     displayRecipes(handleRecipe());
     displayTagsList();
 });
-
+/**
+ * Mets à jour la liste des items en fonction du mot ajouté
+ * @param {HtmlElement} input
+ * @param {HtmlElement} list
+ * @param {String} type
+ */
 function handleFilterInput(input, list, type) {
     const [filterIngre, filterAppli, filterUsten] = testaze(recipes);
     let item;
@@ -136,6 +141,9 @@ function handleFilterInput(input, list, type) {
     addEventOnTag();
 }
 
+/**
+ * Ajout un évenement pour mettre a jour la liste des filtres
+ */
 ingredientInput.addEventListener('input', () => {
     handleFilterInput(ingredientInput, ingredientsList, 'ingredients');
 });
@@ -177,6 +185,11 @@ function filterRecipeByTag() {
     // console.log(filterTags);
     return filterTags;
 }
+/**
+ * 
+ * @param {array} filterTag
+ * @returns array
+ */
 function checkTags(filterTag) {
     tagsArray.forEach((item) => {
         filterTag = filterTag.filter(
@@ -185,6 +198,7 @@ function checkTags(filterTag) {
     });
     return filterTag;
 }
+
 /**
  * affiche du nouveau filtre ingredient
  * @param {array} arr
