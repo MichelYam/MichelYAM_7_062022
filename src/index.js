@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable indent */
 /* eslint-disable no-use-before-define */
 import recipes from '../data/recipes.js';
@@ -96,14 +97,19 @@ function handleRecipe() {
 /**
  * affichage des tags
  */
-function displayTagsList() {
+function displayListItem() {
     const recipesList = handleRecipe();
-    const [filterIngre, filterAppli, filterUsten] = getAllFilterItems(recipesList);
-
+    let [filterIngre, filterAppli, filterUsten] = getAllFilterItems(recipesList);
+    // if(tagsArray)
+    if (tagsArray.length !== 0) {
+        const filterArrayCurrent = updateFilterListData();
+        filterIngre = filterArrayCurrent[0];
+        filterAppli = filterArrayCurrent[1];
+        filterUsten = filterArrayCurrent[2];
+    }
     ingredientsList.innerHTML = filterList(filterIngre);
     appliancesList.innerHTML = filterList(filterAppli);
     ustensilsList.innerHTML = filterList(filterUsten);
-
     addEventOnTag();
 }
 
@@ -111,9 +117,10 @@ function displayTagsList() {
 searchInput.addEventListener('input', () => {
     if (tagsArray.length === 0) {
         displayRecipes(handleRecipe());
-        displayTagsList();
+        displayListItem();
     } else {
         displayRecipes(filterRecipeByTag());
+        displayListItem();
     }
 });
 
@@ -124,20 +131,25 @@ searchInput.addEventListener('input', () => {
  * @param {String} type
  */
 function handleFilterInput(input, list, type) {
-    const [filterIngre, filterAppli, filterUsten] = getAllFilterItems(recipes);
+    let [filterIngre, filterAppli, filterUsten] = getAllFilterItems(recipes);
+    const filterArrayCurrent = updateFilterListData();
     let item;
+    if (tagsArray.length !== 0) {
+        filterIngre = filterArrayCurrent[0];
+        filterAppli = filterArrayCurrent[1];
+        filterUsten = filterArrayCurrent[2];
+    }
     switch (type) {
         case 'ingredients':
             item = getItemsFilter(input, filterIngre);
-
             break;
         case 'devices':
+
             item = getItemsFilter(input, filterAppli);
 
             break;
         case 'ustensils':
             item = getItemsFilter(input, filterUsten);
-
             break;
         default:
             console.log('failed');
@@ -160,7 +172,7 @@ deviceInput.addEventListener('input', () => {
 });
 
 ustensilsInput.addEventListener('input', () => {
-    updateFilterListData();
+    // updateFilterListData();
     handleFilterInput(ustensilsInput, ustensilsList, 'ustensils');
 });
 
@@ -172,7 +184,6 @@ function filterRecipeByTag() {
     /* En fonction du type du tag ajouté retourne tous les ingrédiants, ustensils ou appareils
     correspondant */
     filterTags = handleRecipe();
-    console.log(filterTags);
     tagsArray.forEach((tag) => {
         switch (tag.type) {
             case 'ingredients':
@@ -216,14 +227,18 @@ function checkTags(filterTag) {
  */
 function updateFilterListData() {
     // retourne les elements de chaque filtre
-    const [filterIngre, filterAppli, filterUsten] = getAllFilterItems(filterTags);
+    let [filterIngre, filterAppli, filterUsten] = getAllFilterItems(filterTags);
+    filterIngre = checkTags(filterIngre);
+    filterAppli = checkTags(filterAppli);
+    filterUsten = checkTags(filterUsten);
 
     // Affichage les éléments filtré
-    ingredientsList.innerHTML = filterList(checkTags(filterIngre));
-    appliancesList.innerHTML = filterList(checkTags(filterAppli));
-    ustensilsList.innerHTML = filterList(checkTags(filterUsten));
+    ingredientsList.innerHTML = filterList(filterIngre);
+    appliancesList.innerHTML = filterList(filterAppli);
+    ustensilsList.innerHTML = filterList(filterUsten);
     // ajoute l'évènement click pour chaque éléments
     addEventOnTag();
+    return [filterIngre, filterAppli, filterUsten];
 }
 
 /**
@@ -236,7 +251,6 @@ export default function removeTag(tagItem) {
         (tag) => tag.name !== tagItem.name,
     );
 
-    console.log(tagsArray);
     filterTags = recipes;
     // check s'il y a au moins 1 tag
     if (tagsArray.length > 0) {
@@ -308,7 +322,7 @@ function addEventOnTag() {
 
 function init() {
     handleDownMenu();
-    displayTagsList();
+    displayListItem();
     displayRecipes(recipes);
 }
 

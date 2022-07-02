@@ -124,6 +124,7 @@ export function tagsList(tag) {
  */
 export function getItemsFilter(input, array) {
     const inputLower = input.value.toLowerCase();
+    console.log(array);
     const newArr = array.filter((item) => {
         if (item.toLowerCase().includes(inputLower)) {
             return true;
