@@ -81,22 +81,6 @@ function handleRecipe() {
     const inputValue = searchInput.value.toLowerCase();
     const array = [];
     if (inputValue.length >= 3) {
-        // const recipeArr = recipes.filter((recipe) => {
-        //     const recipeName = recipe.name.toLowerCase();
-        //     const recipeDescription = recipe.description.toLowerCase();
-
-        //     // filter by name and description
-        //     if (recipeName.includes(inputValue) || recipeDescription.includes(inputValue)) {
-        //         return true;
-        //     }
-
-        //     // filter by ingredient
-        //     if (recipe.ingredients.find((item) => item.ingredient.toLowerCase()
-        //         .includes(inputValue))) {
-        //         return true;
-        //     }
-        // });
-        // return recipeArr;
         recipes.forEach((recipe) => {
             const recipeName = recipe.name.toLowerCase();
             const recipeDescription = recipe.description.toLowerCase();
